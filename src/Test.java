@@ -58,21 +58,28 @@ public class Test {
     public static boolean IsGuanxiyunsuanfu(char x) { return x == '=' || x == '<' || x == '>'; }
 
     public static void read_write_File () throws IOException {
+        //读预输入的语句
         FileReader reader = new FileReader("in.txt");
         BufferedReader bReader = new BufferedReader(reader);
-
+        //处理结果输出到out.txt
         FileWriter writer = new FileWriter("out.txt");
         BufferedWriter bWriter = new BufferedWriter(writer);
+        //输出保留字符到ReserveWordOut.txt
         FileWriter writer1 = new FileWriter("ReserveWordOut.txt");
         BufferedWriter bWriter1 = new BufferedWriter(writer1);
+        //输出标识符到IDentifierTableOut.txt
         FileWriter writer2 = new FileWriter("IDentifierTableOut.txt");
         BufferedWriter bWriter2 = new BufferedWriter(writer2);
+        //输出算数运算符到SuanshuyunsuanfuOut.txt
         FileWriter writer3 = new FileWriter("SuanshuyunsuanfuOut.txt");
         BufferedWriter bWriter3 = new BufferedWriter(writer3);
+        //输出数字到DigitOut.txt
         FileWriter writer4 = new FileWriter("DigitOut.txt");
         BufferedWriter bWriter4 = new BufferedWriter(writer4);
+        //输出界符到JiefuOut.txt
         FileWriter writer5 = new FileWriter("JiefuOut.txt");
         BufferedWriter bWriter5 = new BufferedWriter(writer5);
+        //输出关系运算到GuanxiyunsuanfuOut.txt
         FileWriter writer6 = new FileWriter("GuanxiyunsuanfuOut.txt");
         BufferedWriter bWriter6 = new BufferedWriter(writer6);
 
