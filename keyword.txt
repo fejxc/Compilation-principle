@@ -1,12 +1,4 @@
-1：标识符
-
-2：数字
-
-3：算数运算符 + - *
-
-4：关系运算符 <=、  >=、  <>、  == =、 <、>
-
-5：保留字(32)
+0：保留字(32)
 auto       break    case     char        const      continue
 default    do       double   else        enum       extern
 float      for      goto     if          int        long
@@ -14,4 +6,15 @@ register   return   short    signed      sizeof     static
 struct     switch   typedef  union       unsigned   void
 volatile    while
 
-6：界符
+1：标识符
+
+2：算数运算符 + - *
+
+3：数字
+
+4：界符
+
+5：关系运算符 <=、  >=、  <>、  == =、 <、>
+
+
+

@@ -8,7 +8,7 @@ public class Test {
 
     //保留字表
     public static Set<String> ReserveWord = new HashSet<>();
-    //界符表(12)
+    //界符表
     public static Set<Character> JiefuTable = new HashSet<>();
     //标识符表
     public static Set<String> IDentifierTable = new HashSet<>();
@@ -17,6 +17,7 @@ public class Test {
 
 
     static {
+        //保留字32个
         String[] strs = {
                 "auto", "break", "case", "char", "const", "continue",
                 "default", "do", "double", "else", "enum", "extern",
@@ -26,7 +27,7 @@ public class Test {
                 "volatile", "while"
         };
 
-        //界符表(12)
+        //界符表12个
         Character[] Jiefu = {
             ';', '(', ')', '^', ',', '#', '%', '[', ']', '{', '}', '.'
         };
@@ -114,13 +115,13 @@ public class Test {
                     }
                     if(ReserveWord.contains(str))
                     {
-                        System.out.println(str);
+                        System.out.println("<\t"+str+"\t,\t"+"0(保留字)"+"\t>");
                         bWriter.write("(" + "0" + "," + str + ")" + "\r\n");
                         bWriter1.write("(" + "0" + "," + str + ")" + "\r\n");
                         continue;
                     }
                     IDentifierTable.add(str);
-                    System.out.println("<"+str+"\t,\t"+"1(标识符)"+">");
+                    System.out.println("<\t"+str+"\t,\t"+"1(标识符)"+"\t>");
                     bWriter.write("(" + "1" + "," + str + ")" + "\r\n");
                     bWriter2.write("(" + "1" + "," + str + ")" + "\r\n");
 
@@ -129,7 +130,7 @@ public class Test {
                 else if(IsSuanshuyunsuanfu(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count++);
-                    System.out.println("<"+str+"\t,\t"+"2(算数运算符)"+">");
+                    System.out.println("<\t"+str+"\t,\t"+"2(算数运算符)"+"\t>");
                     bWriter.write("(" + "2" + "," + str + ")" + "\r\n");
                     bWriter3.write("(" + "2" + "," + str + ")" + "\r\n");
                 }
@@ -141,7 +142,7 @@ public class Test {
                         str += content.charAt(count++);
                     }
                     DigitBTable.add(str);
-                    System.out.println("<"+str+"\t,\t"+"3(数字)"+">");
+                    System.out.println("<\t"+str+"\t,\t"+"3(数字)"+"\t>");
                     bWriter.write("(" + "3" + "," + str + ")" + "\r\n");
                     bWriter4.write("(" + "3" + "," + str + ")" + "\r\n");
                 }
@@ -149,7 +150,7 @@ public class Test {
                 else if(IsJiefu(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count);
-                    System.out.println("<"+str+"\t,\t"+"4(界符)"+">");
+                    System.out.println("<\t"+str+"\t,\t"+"4(界符)"+"\t>");
                     bWriter.write("(" + "4" + "," + str + ")" + "\r\n");
                     bWriter5.write("(" + "4" + "," + str + ")" + "\r\n");
                     count++;
@@ -176,7 +177,7 @@ public class Test {
                             str += content.charAt(count++);
                         }
                     }
-                    System.out.println("<"+str+"\t,\t"+"5(保留字)"+">");
+                    System.out.println("<\t"+str+"\t,\t"+"5(关系运算符)"+"\t>");
                     bWriter.write("(" + "5" + "," + str + ")" + "\r\n");
                     bWriter6.write("(" + "5" + "," + str + ")" + "\r\n");
                 }
@@ -210,14 +211,14 @@ public class Test {
                         }
                     }
                 }
-
-                else {
-                    String str = "";
-                    str += content.charAt(count);
-                    count++;
-                    System.out.println(str);
-                    bWriter.write("(" + "6" + "," + str + ")" + "\r\n");
-                }
+//
+//                else {
+//                    String str = "";
+//                    str += content.charAt(count);
+//                    count++;
+//                    System.out.println("<"+str+"\t,\t"+"6(界符)"+">");
+//                    bWriter.write("(" + "6" + "," + str + ")" + "\r\n");
+//                }
             }
 
         }
