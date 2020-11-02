@@ -120,7 +120,7 @@ public class Test {
                         continue;
                     }
                     IDentifierTable.add(str);
-                    System.out.println(str);
+                    System.out.println("<"+str+"\t,\t"+"1(标识符)"+">");
                     bWriter.write("(" + "1" + "," + str + ")" + "\r\n");
                     bWriter2.write("(" + "1" + "," + str + ")" + "\r\n");
 
@@ -129,7 +129,7 @@ public class Test {
                 else if(IsSuanshuyunsuanfu(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count++);
-                    System.out.println(str);
+                    System.out.println("<"+str+"\t,\t"+"2(算数运算符)"+">");
                     bWriter.write("(" + "2" + "," + str + ")" + "\r\n");
                     bWriter3.write("(" + "2" + "," + str + ")" + "\r\n");
                 }
@@ -141,7 +141,7 @@ public class Test {
                         str += content.charAt(count++);
                     }
                     DigitBTable.add(str);
-                    System.out.println(str);
+                    System.out.println("<"+str+"\t,\t"+"3(数字)"+">");
                     bWriter.write("(" + "3" + "," + str + ")" + "\r\n");
                     bWriter4.write("(" + "3" + "," + str + ")" + "\r\n");
                 }
@@ -149,7 +149,7 @@ public class Test {
                 else if(IsJiefu(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count);
-                    System.out.println(str);
+                    System.out.println("<"+str+"\t,\t"+"4(界符)"+">");
                     bWriter.write("(" + "4" + "," + str + ")" + "\r\n");
                     bWriter5.write("(" + "4" + "," + str + ")" + "\r\n");
                     count++;
@@ -176,7 +176,7 @@ public class Test {
                             str += content.charAt(count++);
                         }
                     }
-                    System.out.println(str);
+                    System.out.println("<"+str+"\t,\t"+"5(保留字)"+">");
                     bWriter.write("(" + "5" + "," + str + ")" + "\r\n");
                     bWriter6.write("(" + "5" + "," + str + ")" + "\r\n");
                 }
