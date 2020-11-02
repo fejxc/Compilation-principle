@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class Test {
 
-
     //保留字表
     public static Set<String> ReserveWord = new HashSet<>();
     //界符表
@@ -14,7 +13,6 @@ public class Test {
     public static Set<String> IDentifierTable = new HashSet<>();
     //常数表
     public static Set<String> DigitBTable = new HashSet<>();
-
 
     static {
         //保留字32个
@@ -31,9 +29,9 @@ public class Test {
         Character[] Jiefu = {
             ';', '(', ')', '^', ',', '#', '%', '[', ']', '{', '}', '.'
         };
-
+        //java.until.Arrays提供了asList()方法将数组转换成List对象，但该List是不可变的
         ReserveWord.addAll(Arrays.asList(strs));
-        JiefuTable.addAll(Arrays.asList(Jiefu));
+        JiefuTable.addAll(Arrays.asList(Jiefu));//并运算
     }
 
     //判断是否是：字母
@@ -63,18 +61,6 @@ public class Test {
 
         FileWriter writer = new FileWriter("out.txt");
         BufferedWriter bWriter = new BufferedWriter(writer);
-        FileWriter writer1 = new FileWriter("ReserveWordOut.txt");
-        BufferedWriter bWriter1 = new BufferedWriter(writer1);
-        FileWriter writer2 = new FileWriter("IDentifierTableOut.txt");
-        BufferedWriter bWriter2 = new BufferedWriter(writer2);
-        FileWriter writer3 = new FileWriter("SuanshuyunsuanfuOut.txt");
-        BufferedWriter bWriter3 = new BufferedWriter(writer3);
-        FileWriter writer4 = new FileWriter("DigitOut.txt");
-        BufferedWriter bWriter4 = new BufferedWriter(writer4);
-        FileWriter writer5 = new FileWriter("JiefuOut.txt");
-        BufferedWriter bWriter5 = new BufferedWriter(writer5);
-        FileWriter writer6 = new FileWriter("GuanxiyunsuanfuOut.txt");
-        BufferedWriter bWriter6 = new BufferedWriter(writer6);
 
 
         String content= "";
@@ -86,55 +72,38 @@ public class Test {
 
             int count = 0;
 
-            while (flag) {
-                while (count < content.length()) {
-                    if(content.charAt(count)=='*') {
-                        count++;
-
-                        if(count< content.length() && content.charAt(count)=='/') {
-                            count++;
-                            flag = false;
-                        }
-                    }
-                    else count++;
-                }
-                break;
-            }
-
             while (count < content.length()) {
 
                 if (content.charAt(count) == ' ') {
                     count++;
                 }
-
+                //判断是字母或者'_'开头
                 else if (Isletter(content.charAt(count)) || content.charAt(count) == '_') {
                     String str = "";
                     str += content.charAt(count++);
                     while (count < content.length() && (Isletter(content.charAt(count)) || IsDigit(content.charAt(count)) || content.charAt(count)=='_')) {
                         str += content.charAt(count++);
                     }
+                    //判断是不是保留字
                     if(ReserveWord.contains(str))
                     {
                         System.out.println("<\t"+str+"\t,\t"+"0(保留字)"+"\t>");
                         bWriter.write("(" + "0" + "," + str + ")" + "\r\n");
-                        bWriter1.write("(" + "0" + "," + str + ")" + "\r\n");
                         continue;
                     }
+                    //判断是不是标识符
                     IDentifierTable.add(str);
                     System.out.println("<\t"+str+"\t,\t"+"1(标识符)"+"\t>");
                     bWriter.write("(" + "1" + "," + str + ")" + "\r\n");
-                    bWriter2.write("(" + "1" + "," + str + ")" + "\r\n");
-
                 }
-
+                //判断是不是算数运算符
                 else if(IsSuanshuyunsuanfu(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count++);
                     System.out.println("<\t"+str+"\t,\t"+"2(算数运算符)"+"\t>");
                     bWriter.write("(" + "2" + "," + str + ")" + "\r\n");
-                    bWriter3.write("(" + "2" + "," + str + ")" + "\r\n");
                 }
-
+                //判断是不是数字
                 else if(IsDigit(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count++);
@@ -144,21 +113,18 @@ public class Test {
                     DigitBTable.add(str);
                     System.out.println("<\t"+str+"\t,\t"+"3(数字)"+"\t>");
                     bWriter.write("(" + "3" + "," + str + ")" + "\r\n");
-                    bWriter4.write("(" + "3" + "," + str + ")" + "\r\n");
                 }
-
+                //判断是不是分界符
                 else if(IsJiefu(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count);
                     System.out.println("<\t"+str+"\t,\t"+"4(界符)"+"\t>");
                     bWriter.write("(" + "4" + "," + str + ")" + "\r\n");
-                    bWriter5.write("(" + "4" + "," + str + ")" + "\r\n");
                     count++;
 
                 }
-
+                //判断是不是关系运算
                 else if(IsGuanxiyunsuanfu(content.charAt(count))) {
-
                     String str = "";
                     if (content.charAt(count) == '<') {
                         str += content.charAt(count);
@@ -179,65 +145,14 @@ public class Test {
                     }
                     System.out.println("<\t"+str+"\t,\t"+"5(关系运算符)"+"\t>");
                     bWriter.write("(" + "5" + "," + str + ")" + "\r\n");
-                    bWriter6.write("(" + "5" + "," + str + ")" + "\r\n");
                 }
-
-                else if(content.charAt(count)=='/') {
-                    String str = "";
-                    str += content.charAt(count);
-                    count++;
-                    if(content.charAt(count)!='*' && content.charAt(count) !='/') {
-
-                        bWriter.write("(" + "2" + "," + str + ")" + "\r\n");
-                        bWriter3.write("(" + "2" + "," + str + ")" + "\r\n");
-
-                    }
-                    if(content.charAt(count)=='/') {
-                        break;
-                    }
-                    if(content.charAt(count)=='*') {
-                        count++;
-                        flag = true;
-                        while (count < content.length()) {
-                            if(content.charAt(count)=='*') {
-                                count++;
-
-                                if(count< content.length() && content.charAt(count)=='/') {
-                                    count++;
-                                    flag = false;
-                                }
-                            }
-                            else count++;
-                        }
-                    }
-                }
-//
-//                else {
-//                    String str = "";
-//                    str += content.charAt(count);
-//                    count++;
-//                    System.out.println("<"+str+"\t,\t"+"6(界符)"+">");
-//                    bWriter.write("(" + "6" + "," + str + ")" + "\r\n");
-//                }
             }
-
         }
+        //关闭文件
         reader.close();
         bReader.close();
         bWriter.close();
         writer.close();
-        bWriter1.close();
-        writer1.close();
-        bWriter2.close();
-        writer2.close();
-        bWriter3.close();
-        writer3.close();
-        bWriter4.close();
-        writer4.close();
-        bWriter5.close();
-        writer5.close();
-        bWriter6.close();
-        writer6.close();
     }
 
     public static void main(String[] args) throws IOException {
