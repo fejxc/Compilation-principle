@@ -1,1 +1,2 @@
-int j = i* 60 + 20 ; //注释
+int position = _initial- +rate / 60 - 90 ;
+

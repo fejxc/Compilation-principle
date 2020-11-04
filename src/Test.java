@@ -49,7 +49,7 @@ public class Test {
     //判断是否是 算数运算符：加减乘
     public static boolean IsSuanshuyunsuanfu(char x)
     {
-        return x == '+' || x == '-' || x == '*';
+        return x == '+' || x == '-' || x == '*' || x == '/';
     }
 
     //判断是否是 关系运算符：等于（赋值），大于小于（大于等于，小于等于，大于小于）
@@ -69,7 +69,6 @@ public class Test {
         //readLine一行一行的读取
         while((content = bReader.readLine()) != null) {
 
-
             int count = 0;
 
             while (count < content.length()) {
@@ -81,7 +80,7 @@ public class Test {
                 else if (Isletter(content.charAt(count)) || content.charAt(count) == '_') {
                     String str = "";
                     str += content.charAt(count++);
-                    while (count < content.length() && (Isletter(content.charAt(count)) || IsDigit(content.charAt(count)) || content.charAt(count)=='_')) {
+                    while (count < content.length() && (Isletter(content.charAt(count)) || IsDigit(content.charAt(count)) || content.charAt(count)=='_' || content.charAt(count)=='-')) {
                         str += content.charAt(count++);
                     }
                     //判断是不是保留字
