@@ -1,2 +1,2 @@
-int position = _initial- +rate / 60 - 90 ;
+int $position = _inition +rate / 60 - 90 ;
 

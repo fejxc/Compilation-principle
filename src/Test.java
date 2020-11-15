@@ -34,8 +34,11 @@ public class Test {
         JiefuTable.addAll(Arrays.asList(Jiefu));//并运算
     }
 
-    //判断是否是：字母
-    public static boolean Isletter(char x) { return (x >= 'a' && x <= 'z')||(x >= 'A' && x <= 'Z'); }
+    //判断是否是：标识符开头、字母，下划线，美元符号
+    public static boolean Isletter(char x) {
+
+        return (x >= 'a' && x <= 'z')||(x >= 'A' && x <= 'Z') || x=='_' || x=='$';
+    }
 
     //判断是否是：数字
     public static boolean IsDigit(char x) { return x >= '0' && x <= '9'; }
@@ -76,14 +79,13 @@ public class Test {
                 if (content.charAt(count) == ' ') {
                     count++;
                 }
-                //判断是字母或者'_'开头
-                else if (Isletter(content.charAt(count)) || content.charAt(count) == '_') {
+                //判断是字母或者'_' 或者 $ 开头
+                else if (Isletter(content.charAt(count))) {
                     String str = "";
                     str += content.charAt(count++);
-                    while (count < content.length() && (Isletter(content.charAt(count)) || IsDigit(content.charAt(count)) || content.charAt(count)=='_' || content.charAt(count)=='-')) {
-                        str += content.charAt(count++);
-                    }
-                    //判断是不是保留字
+                    while (count < content.length() &&  Isletter(content.charAt(count)) || IsDigit(content.charAt(count)) || content.charAt(count)=='_') {
+                            str += content.charAt(count++);
+                        }
                     if(ReserveWord.contains(str))
                     {
                         System.out.println("<\t"+str+"\t,\t"+"0(保留字)"+"\t>");
